@@ -4,6 +4,9 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/page/__header/page__header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__user-email/header__user-email.css);
+@import url(./blocks/header/__user/header__user.css);
 @import url(./blocks/page/page.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/main/__profile/main__profile.css);
@@ -59,103 +62,14 @@
 @import url(./blocks/popup/__close/_type/popup__close_type_agreement.css);
 @import url(./blocks/popup/__close/_type/popup__close_type_avatar.css);
 @import url(./blocks/profile/__button-avatar/profile__button-avatar.css);
-
-
-.authorization {
-  margin: 0 auto;
-  max-width: 358px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.authorization__title {
-  margin: 20px auto 50px;
-  font-size: 24px;
-  font-weight: 900;
-}
-
-.authorization__button {
-  margin: 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 2px;
-  background: #FFF;
-  min-height: 50px;
-  max-width: 358px;
-  width: 100%;
-  color: #000;
-  font-size: 18px;
-}
-
-.authorization__button:hover {
-  cursor: pointer;
-  opacity: 0.85;
-}
-
-.authorization__form {
-  max-width: 358px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-}
-
-.authorization__fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.authorization__field {
-  width: 100%;
-  color: #CCCCCC;
-  border: 0;
-  border-bottom: 2px solid #CCCCCC;
-  background-color: #000000;
-  padding: 0 0 8px 0;
-  font-size: 14px;
-  line-height: 1.22;
-}
-
-.authorization__field:last-of-type {
-  margin: 30px auto 216px;
-}
-
-.popup__info-icon {
-  width: 120px;
-  height: 120px;
-}
-
-.header__login {
-  font-size: 18px;
-  line-height: 1.22;
-  color: #FFF;
-  text-decoration: none;
-}
-
-.popup__container_type_tooltip {
-  min-height: 330px;
-}
-
-.popup__info-message {
-  color: #000000;
-  text-align: center;
-  max-width: 358px;
-  margin: 32px 0 0 0;
-}
-
-.authorization-question {
-  margin: 15px 0 0 0;
-  text-align: center;
-  font-size: 14px;
-}
-
-.authorization-link {
-  color: #FFFFFF;
-  text-decoration: none;
-}
+@import url(./blocks/authorization/authorization.css);
+@import url(./blocks/authorization/__title/authorization__title.css);
+@import url(./blocks/authorization/__button/authorization__button.css);
+@import url(./blocks/authorization/__form/authorization__form.css);
+@import url(./blocks/authorization/__fieldset/authorization__fieldset.css);
+@import url(./blocks/authorization/__field/authorization__field.css);
+@import url(./blocks/authorization/__question/authorization__question.css);
+@import url(./blocks/popup/__info-icon/popup__info-icon.css);
+@import url(./blocks/popup/__container/_type/popup__container_type_tooltip.css);
+@import url(./blocks/popup/__info-message/popup__info-message.css);
+@import url(./blocks/authorization/__link/authorization__link.css);

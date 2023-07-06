@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Auth from "./Auth";
+import Form from "./Form";
 import { Link } from "react-router-dom";
 
 
@@ -27,7 +27,7 @@ function Register({ isRegister }) {
 
   return (
     <>
-      <Auth title="Регистрация" buttonText="Зарегистрироваться" onSubmit={handleSubmit}>
+      <Form title="Регистрация" buttonText="Зарегистрироваться" onSubmit={handleSubmit}>
         <>
           <input
             className="authorization__field"
@@ -57,11 +57,11 @@ function Register({ isRegister }) {
           />
           <span className="authorization-error authorization-password-error" />
         </>
-      </Auth>
-      <p className="authorization-question">Уже зарегистрированы?{' '}
+      </Form>
+      <p className="authorization__question">Уже зарегистрированы?{' '}
         <Link
           to="/sign-in"
-          className="authorization-link">
+          className="authorization__link">
           Войти
         </Link>
       </p>

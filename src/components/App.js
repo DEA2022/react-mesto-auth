@@ -11,7 +11,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { register } from '../utils/auth';
+import { authorization, getToken, register } from '../utils/auth';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
@@ -34,9 +34,10 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [cardIdDelete, setCardIdDelete] = React.useState('')
 
-  const [loggedIn, setLoggedIn] = React.useState(true)
+  const [loggedIn, setLoggedIn] = React.useState(false)
   const navigate = useNavigate();
   const [isInfoTooltipSuccess, setIsInfoTooltipSuccess] = React.useState(false);
+  const [userEmail, setUserEmail] = React.useState('');
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -47,6 +48,10 @@ function App() {
       .catch(errorMessage => {
         console.error(`Операция не выполнена ${errorMessage}`)
       })
+  }, [])
+
+  React.useEffect(() => {
+    handleTokenCheck();
   }, [])
 
 
@@ -62,9 +67,6 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  // function handleTooltipClick() {
-  //   setIsTooltipPopupOpen(true);
-  // }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
@@ -184,13 +186,53 @@ function App() {
         setIsTooltipPopupOpen(true));
   }
 
+  function handleLoginSubmit(email, password) {
+    authorization(email, password)
+      .then(data => {
+        if (data.token) {
+          setLoggedIn(true);
+          localStorage.setItem('jwt', data.token);
+          handleTokenCheck();
+          navigate('/');
+        }
+      })
+      .catch(errorMessage => {
+        setIsTooltipPopupOpen(true);
+        setIsInfoTooltipSuccess(false);
+        console.error(`Авторизация не выполнена ${errorMessage}`)
+      })
+  }
+
+  function handleTokenCheck() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      getToken(jwt)
+        .then((res) => {
+          if (res) {
+            setUserEmail(res.data.email);
+            setLoggedIn(true);
+            navigate("/");
+          }
+        })
+        .catch((errorMessage) => {
+          console.error(`Верификация токена не выполнена ${errorMessage}`)
+        })
+    }
+  }
+
+  function loggedOut() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+  }
+
+
 
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
-        <Header />
+        <Header userEmail={userEmail} loggedIn={loggedIn} loggedOut={loggedOut} />
         <Routes>
           <Route path="/" element={
             <ProtectedRoute
@@ -207,7 +249,7 @@ function App() {
           }
           />
           <Route path="/sign-up" element={<Register isRegister={handleRegisterSubmit} />} />
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-in" element={<Login isLogin={handleLoginSubmit} />} />
         </Routes>
 
         <InfoTooltip

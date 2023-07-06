@@ -1,6 +1,6 @@
 import '../index.css'
 
-function Auth({ title, buttonText, children, onSubmit }) {
+function Form({ title, buttonText, children, onSubmit }) {
 
   return (
 
@@ -16,4 +16,4 @@ function Auth({ title, buttonText, children, onSubmit }) {
   )
 }
 
-export default Auth
+export default Form
