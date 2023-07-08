@@ -1,25 +1,15 @@
-import { useState } from 'react';
 import '../index.css'
 import AuthForm from './AuthForm';
+import { useForm } from '../hooks/useForm';
 
 
 function Login({ isLogin }) {
+  const { values, handleChange } = useForm({ email: '', password: '' });
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-
-  function handleEmailChange(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handlePasswordChange(evt) {
-    setPassword(evt.target.value);
-  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    isLogin(email, password)
+    isLogin(values.email, values.password)
   }
 
   return (
@@ -33,8 +23,8 @@ function Login({ isLogin }) {
         placeholder="Email"
         minLength={8}
         maxLength={30}
-        onChange={handleEmailChange}
-        value={email || ''}
+        onChange={handleChange}
+        value={values.email || ''}
       />
       <span className="authorization-error authorization-email-error" />
       <input
@@ -46,8 +36,8 @@ function Login({ isLogin }) {
         placeholder="Пароль"
         minLength={6}
         maxLength={18}
-        onChange={handlePasswordChange}
-        value={password || ''}
+        onChange={handleChange}
+        value={values.password || ''}
       />
       <span className="authorization-error authorization-password-error" />
     </AuthForm>

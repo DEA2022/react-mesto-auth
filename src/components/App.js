@@ -4,6 +4,7 @@ import Header from './Header.js';
 import Main from './Main.js'
 import Footer from './Footer.js'
 import PopupWithForm from './PopupWithForm.js';
+import Popup from './Popup';
 import ImagePopup from './ImagePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/api';
@@ -296,9 +297,12 @@ function App() {
         />
 
         <ImagePopup
+          name='image'
+          isOpen={selectedCard?.link}
           card={selectedCard}
           onClose={closeAllPopups}
-          onCloseByOverlay={closePopupsByClickOverlay} />
+          additionalClass='popup__close_el_pic'
+        />
       </div>
     </CurrentUserContext.Provider>
 

@@ -1,27 +1,15 @@
-import { useState } from "react";
 import AuthForm from "./AuthForm";
 import { Link } from "react-router-dom";
-
+import { useForm } from "../hooks/useForm";
 
 
 function Register({ isRegister }) {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-
-
-  function handleEmailChange(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handlePasswordChange(evt) {
-    setPassword(evt.target.value);
-  }
+  const { values, handleChange } = useForm({ email: '', password: '' });
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    isRegister(email, password)
+    isRegister(values.email, values.password)
   }
 
 
@@ -37,8 +25,8 @@ function Register({ isRegister }) {
           placeholder="Email"
           minLength={8}
           maxLength={30}
-          value={email || ''}
-          onChange={handleEmailChange}
+          value={values.email || ''}
+          onChange={handleChange}
         />
         <span className="authorization-error authorization-email-error" />
         <input
@@ -50,8 +38,8 @@ function Register({ isRegister }) {
           placeholder="Пароль"
           minLength={6}
           maxLength={18}
-          value={password || ''}
-          onChange={handlePasswordChange}
+          value={values.password || ''}
+          onChange={handleChange}
         />
         <span className="authorization-error authorization-password-error" />
       </AuthForm>

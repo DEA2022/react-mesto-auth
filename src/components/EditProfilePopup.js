@@ -1,6 +1,7 @@
 import PopupWithForm from "./PopupWithForm"
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useForm } from "../hooks/useForm";
 
 function EditProfilePopup({
   isOpen,
@@ -9,27 +10,21 @@ function EditProfilePopup({
   onUpdateUser
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const { values, handleChange, setValues } = useForm({ name: '', job: '' });
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    setValues({
+      name: currentUser.name,
+      job: currentUser.about
+    })
   }, [currentUser, isOpen]);
 
-  function handleChangeName(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleChangeDescription(evt) {
-    setDescription(evt.target.value);
-  }
 
   function handleSubmitEditProfile(evt) {
     evt.preventDefault();
     onUpdateUser({
-      name: name,
-      job: description,
+      name: values.name,
+      job: values.job,
     });
   }
 
@@ -54,8 +49,8 @@ function EditProfilePopup({
           minLength={2}
           maxLength={40}
           required
-          value={name ? name : ''}
-          onChange={handleChangeName}
+          value={values.name || ''}
+          onChange={handleChange}
         />
         <span className="form__error form-name-error" />
         <input type="text"
@@ -66,8 +61,8 @@ function EditProfilePopup({
           minLength={2}
           maxLength={200}
           required
-          value={description ? description : ''}
-          onChange={handleChangeDescription}
+          value={values.job || ''}
+          onChange={handleChange}
         />
         <span className="form__error form-job-error" />
       </fieldset>

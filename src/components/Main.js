@@ -36,9 +36,14 @@ function Main({
       <section className="photo page__photo" aria-label="Фото посещенных мест">
         <ul className="photo__grid">
           {cards.map(item => {
-            return <Card cardData={item} key={item._id} onCardClick={onCardClick} onDelete={onDelete} onCardLike={onCardLike} />
+            return (
+              <Card
+                cardData={item}
+                key={item._id}
+                onCardClick={onCardClick}
+                onDelete={onDelete}
+                onCardLike={onCardLike} />)
           })}
-
         </ul>
       </section>
     </main>

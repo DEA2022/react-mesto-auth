@@ -1,5 +1,6 @@
 import PopupWithForm from "./PopupWithForm"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useForm } from "../hooks/useForm";
 
 function AddPlacePopup({
   isOpen,
@@ -7,29 +8,20 @@ function AddPlacePopup({
   onCloseByOverlay,
   onAddPlace
 }) {
-  const [place, setPlace] = useState('')
-  const [url, setUrl] = useState('')
 
-  function handleChangePlace(evt) {
-    setPlace(evt.target.value)
-  }
-
-  function handleChangeUrl(evt) {
-    setUrl(evt.target.value)
-  }
+  const { values, handleChange, setValues } = useForm({ place: '', url: '' });
 
   function handleSubmitAddPlace(evt) {
     evt.preventDefault();
 
     onAddPlace({
-      place,
-      url
+      place: values.place,
+      url: values.url
     })
   }
 
   useEffect(() => {
-    setPlace('');
-    setUrl('');
+    setValues('')
   }, [isOpen]);
 
   return (
@@ -52,8 +44,8 @@ function AddPlacePopup({
           minLength={2}
           maxLength={30}
           required
-          value={place ? place : ''}
-          onChange={handleChangePlace}
+          value={values.place || ''}
+          onChange={handleChange}
 
         />
         <span className="form__error form-place-error" />
@@ -64,8 +56,8 @@ function AddPlacePopup({
           name="url"
           placeholder="Ссылка на картинку"
           required
-          value={url ? url : ''}
-          onChange={handleChangeUrl}
+          value={values.url || ''}
+          onChange={handleChange}
         />
         <span className="form__error form-url-error" />
       </fieldset>
