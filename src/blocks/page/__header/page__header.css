@@ -4,6 +4,6 @@
 
 @media (max-width: 690px) {
   .page__header {
-    margin: 28px 0 42px;
+    margin: 28px auto 42px;
   }
 }

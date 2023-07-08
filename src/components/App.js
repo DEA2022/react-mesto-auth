@@ -250,6 +250,7 @@ function App() {
           />
           <Route path="/sign-up" element={<Register isRegister={handleRegisterSubmit} />} />
           <Route path="/sign-in" element={<Login isLogin={handleLoginSubmit} />} />
+          {/* <Route path="*" element={loggedIn ? <Navigate to='/' /> : <Navigate to='/sign-in' />} /> */}
         </Routes>
 
         <InfoTooltip
@@ -260,7 +261,7 @@ function App() {
           isTooltipSuccess={isInfoTooltipSuccess}
         />
 
-        <Footer />
+        {loggedIn && <Footer />}
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
