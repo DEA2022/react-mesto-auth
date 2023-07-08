@@ -18,14 +18,13 @@ function PopupWithForm({
     <div className={`popup popup_type_${name}` + (isOpen && ' popup_opened')} onClick={onCloseByOverlay}>
       <div className='popup__container'>
         <h2 className={`popup__title ${additionalClass}`}>{title}</h2>
-        <form action="#" className="form" name={name} onSubmit={onSubmit} noValidate>
+        <form action="#" className="form" name={name} onSubmit={onSubmit}>
 
           {children}
 
           <button className="form__submit" type="submit" aria-label={textButton}>{textButton}</button>
         </form>
-        <button className="popup__close popup__close_el_profile" type="button" aria-label="Закрыть" onClick={onClose}>
-        </button>
+        <button className="popup__close" type="button" aria-label="Закрыть" onClick={onClose} />
       </div>
     </div >
   );
