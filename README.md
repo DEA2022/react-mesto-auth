@@ -28,4 +28,4 @@
 - удаление карточек;
 - реализацию лайков.
 
-* Ссылка на проект в githab [Mesto](https://dea2022.github.io/mesto-react-auth/)
+* Ссылка на проект в githab [Mesto](https://dea2022.github.io/react-mesto-auth/)
